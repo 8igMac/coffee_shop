@@ -1,0 +1,39 @@
+Table beans {
+  id integer [primary key, increment]
+  name text
+  description text
+  price numeric [note: 'NTD']
+  amount float [note: 'g']
+  seller text
+  country text
+  location text
+  ranch text
+  process_method text
+  species text
+  created_at timestamp
+}
+
+Table roasts {
+  id integer [primary key, increment]
+  bean_id integer [ref: > beans.id]
+  weight_before float [note: 'g']
+  description text
+  weight_after float [note: 'g']
+  pot_num integer
+  feedback text
+  created_at timestamp
+}
+
+Table users {
+  id integer [primary key, increment]
+  username text
+  created_at timestamp
+}
+
+Table transactions {
+  id integer [primary key, increment]
+  buyer_id integer [ref: > users.id]
+  roast_id integer [ref: > roasts.id]
+  price numeric [note: 'NTD per half pound']
+  created_at timestamp
+}
